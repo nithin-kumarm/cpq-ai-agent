@@ -1,0 +1,22 @@
+
+services:
+  - type: web
+    name: cpq-ai-agent
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.8
+      - key: CPQ_BASE_URL
+        value: https://dev2tfs5.bigmachines.com
+      - key: CPQ_USERNAME
+        sync: false
+      - key: CPQ_PASSWORD
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: OPENAI_MODEL
+        value: gpt-4.1-mini
